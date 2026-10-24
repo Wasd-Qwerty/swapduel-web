@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes">
+    <title>Swap Duel</title>
+    <meta name="description" content="A match-3 duel: beat the bot or challenge a friend by code.">
+    <meta name="theme-color" content="#7698fe">
+    <style>
+      html, body { height: 100%; }
+      body {
+        padding: 0; border: 0; margin: 0;
+        /* Letterbox bars on wide/desktop windows. This is a portrait-locked phone game, so on a wide window
+           (e.g. Telegram Desktop) the portrait strip is centered and these bars show on the sides. The gradient
+           runs between the top and bottom edges of the game's own background (Art/Candy/bg-home.png), so it reads
+           as part of the game instead of a broken black void. On phones the game fills the screen. */
+        background: linear-gradient(180deg, #7698fe 0%, #462eaa 100%);
+        overflow: hidden;
+        display: flex; align-items: center; justify-content: center;
+      }
+      /* the load screen over the canvas until the game is up: the download is tens of MB on a phone */
+      #loading {
+        position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 1;
+        display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
+        background: inherit; transition: opacity .3s;
+        font: 800 30px/1.2 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: #fff;
+        text-shadow: 0 2px 0 #1b2160;
+      }
+      #loading-track { width: min(60vw, 260px); height: 10px; border-radius: 5px; background: rgba(255, 255, 255, .3); overflow: hidden; }
+      #loading-fill { width: 0; height: 100%; border-radius: 5px; background: linear-gradient(180deg, #c6f59e, #4cb52a); transition: width .2s; }
+      #unity-canvas { display: block; background: #231F20; }
+    </style>
+  </head>
+  <body>
+    <div id="loading"><div>Swap Duel</div><div id="loading-track"><div id="loading-fill"></div></div></div>
+    <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
+    <script src="Build/9dd57041f2f34df55cb6ba761d3fb14c.loader.js"></script>
+    <script>
+      // Swallow the non-fatal IndexedDB persistence error (v5 T24). In-app browsers (Telegram, Instagram,
+      // etc.) and private mode often block IndexedDB, so Emscripten's IDBFS.syncfs -> reconcile throws
+      //   "TypeError: undefined is not an object (evaluating 'dst.entries')"
+      // when Unity tries to persist PlayerPrefs. The game runs fine (prefs just won't survive the session on
+      // that browser), but Unity's default handler pops a scary "An error occurred running the Unity content"
+      // dialog. Catch it in the capture phase and stop it before Unity's handler sees it. Everything else still
+      // surfaces normally.
+      window.addEventListener("error", function (e) {
+        var msg = (e && e.message) || "";
+        if (msg.indexOf("dst.entries") !== -1 || msg.indexOf("reconcile") !== -1) {
+          console.warn("[MatchForever] Suppressed IDBFS persistence error (IndexedDB blocked?): " + msg);
+          e.stopImmediatePropagation();
+          e.preventDefault();
+          return true;
+        }
+      }, true);
+      window.addEventListener("unhandledrejection", function (e) {
+        var msg = (e && e.reason && (e.reason.message || e.reason)) || "";
+        if (String(msg).indexOf("dst.entries") !== -1) { e.preventDefault(); }
+      });
+
+      // Portrait-lock (v5 T16): this is a portrait phone game. On tall/portrait windows the canvas fills the
+      // screen; on windows WIDER than MAX_ASPECT (desktop / landscape) it is capped to a portrait strip and
+      // centered, so the black body shows as letterbox bars on the sides. This keeps the in-game camera in a
+      // portrait aspect everywhere, so the looming enemy/boss always sits ABOVE the board (never over the tiles).
+      var canvas = document.querySelector("#unity-canvas");
+      var MAX_ASPECT = 0.6; // widest allowed width/height (~10:16.7); portrait phones are narrower and fill fully
+      function resizeCanvas() {
+        var ww = window.innerWidth, wh = window.innerHeight;
+        var w = ww, h = wh;
+        if (ww / wh > MAX_ASPECT) { w = Math.round(wh * MAX_ASPECT); h = wh; } // too wide → letterbox
+        // Pin the body to the VISIBLE viewport height. On mobile Safari/Chrome the address bar makes
+        // window.innerHeight (used for the canvas) smaller than a CSS height:100% body, which would center
+        // the canvas with a black gap at the top until the first touch. Matching them fills from the top.
+        document.body.style.height = wh + "px";
+        canvas.style.width = w + "px";
+        canvas.style.height = h + "px";
+      }
+      window.addEventListener("resize", resizeCanvas);
+      resizeCanvas();
+
+      // Telegram Mini App: the same build as the site. Telegram opens the page with its launch data in the hash
+      // (#tgWebAppData=…&tgWebAppVersion=…&tgWebAppPlatform=…), and its script keeps them in sessionStorage for a
+      // reload; only then is telegram-web-app.js loaded, so the plain site never calls telegram.org. The game starts
+      // once the script is in and the saved values' cloud copy read (or the script failed, or 8 s passed: then it
+      // runs as the plain site — window.MF_TELEGRAM, which the jslib's TelegramPlatform side checks, is set only by a
+      // script that came in time; a late one still sets Telegram up). Here, before the long download: hide
+      // Telegram's own loader for ours, take the full height,
+      // keep a vertical swipe on the board from closing the app, hold the portrait, and paint Telegram's bars like
+      // the game's edges (GameShellBridge.Platform repaints them per screen: keep the colours in step).
+      var TG_SCRIPT = "https://telegram.org/js/telegram-web-app.js?64";
+      var TG_HEADER = "#7698fe", TG_BOTTOM = "#462eaa";
+
+      function openedByTelegram() {
+        if (/[#&]tgWebApp[A-Za-z]*=/.test(window.location.hash)) return true;
+        try {
+          var kept = JSON.parse(window.sessionStorage.getItem("__telegram__initParams") || "null");
+          if (kept && kept.tgWebAppPlatform) return true;
+        } catch (e) {}
+        return false;
+      }
+
+      function setUpTelegram() {
+        var tg = window.Telegram && window.Telegram.WebApp;
+        if (!tg || !tg.platform || tg.platform === "unknown") return false;
+        var at = function (v) { try { return tg.isVersionAtLeast(v); } catch (e) { return false; } };
+        var run = function (f) { try { f(); } catch (e) { console.warn("[MatchForever] Telegram", e); } };
+        run(function () { tg.ready(); });
+        run(function () { tg.expand(); });
+        if (at("7.7")) run(function () { tg.disableVerticalSwipes(); });
+        if (at("6.9")) run(function () { tg.setHeaderColor(TG_HEADER); });
+        if (at("6.1")) run(function () { tg.setBackgroundColor(TG_HEADER); });
+        if (at("7.10")) run(function () { tg.setBottomBarColor(TG_BOTTOM); });
+        // the phone held upright (the screen's own orientation: the page may still be Telegram's half-height
+        // sheet); a tablet turned sideways stays free
+        var upright = window.screen && window.screen.orientation && window.screen.orientation.type
+          ? window.screen.orientation.type.indexOf("portrait") === 0
+          : !window.screen || window.screen.height >= window.screen.width;
+        if (at("8.0") && upright) run(function () { tg.lockOrientation(); });
+        return true;
+      }
+
+      // The saved values' copy in Telegram's CloudStorage, read before the game starts and for 2 s at most. The
+      // header "sd_h" {id, rev, n, len, hash, at} names the copy's pieces "sd_<id>_<i>"; each write has its own id
+      // (the jslib's MFPrefs writes them and decides which copy the game starts from: keep the format in step). What
+      // was found goes to window.MF_CLOUD_PREFS: {id, rev, n, at, json} — id "" for an empty cloud, json "" for a
+      // broken copy.
+      // Nothing there (no answer in time, an error): the cloud is unknown, and the jslib checks it before writing.
+      var CLOUD_WAIT_MS = 2000;
+
+      function cloudHash(s) {   // FNV-1a over the UTF-16 units, as the jslib's MFPrefs.hash
+        var h = 0x811c9dc5;
+        for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
+        return h.toString(16);
+      }
+
+      function readCloudPrefs(done) {
+        var tg = window.Telegram.WebApp, cs = tg.CloudStorage;
+        var over = false;
+        var finish = function (found) {
+          if (over) return;
+          over = true;
+          if (found) window.MF_CLOUD_PREFS = found;
+          done();
+        };
+        try { if (!cs || !tg.isVersionAtLeast("6.9")) { finish(); return; } } catch (e) { finish(); return; }
+        setTimeout(finish, CLOUD_WAIT_MS);
+        try {
+          cs.getItem("sd_h", function (err, text) {
+            if (over) return;
+            if (err) { finish(); return; }
+            if (!text) { finish({ id: "", rev: -1, n: 0, json: "" }); return; }
+            var h = null;
+            try { h = JSON.parse(text); } catch (e) {}
+            if (!h || !/^[a-z0-9]{4,16}$/.test(h.id) || typeof h.rev !== "number" || !(h.n >= 1 && h.n <= 64)) {
+              console.warn("[MatchForever] the cloud copy's header is broken");
+              finish({ id: "", rev: -1, n: 0, json: "" });
+              return;
+            }
+            var keys = [];
+            for (var i = 0; i < h.n; i++) keys.push("sd_" + h.id + "_" + i);
+            cs.getItems(keys, function (err2, values) {
+              if (over) return;
+              if (err2 || !values) { finish(); return; }
+              var json = keys.map(function (k) { return values[k] || ""; }).join("");
+              if (json.length !== h.len || cloudHash(json) !== h.hash) {
+                console.warn("[MatchForever] the cloud copy is broken");
+                json = "";
+              }
+              finish({ id: h.id, rev: h.rev, n: h.n, at: h.at, json: json });
+            });
+          });
+        } catch (e) { console.warn("[MatchForever] CloudStorage", e); finish(); }
+      }
+
+      function whenTelegramReady(start) {
+        if (!openedByTelegram()) { start(); return; }
+        var started = false;
+        var go = function () { if (started) return; started = true; start(); };
+        var script = document.createElement("script");
+        script.src = TG_SCRIPT;
+        var fallback = setTimeout(go, 8000);
+        script.onload = function () {
+          clearTimeout(fallback);   // the cloud read has its own limit
+          if (setUpTelegram() && !started) { window.MF_TELEGRAM = true; readCloudPrefs(go); return; }
+          go();
+        };
+        script.onerror = function () { console.warn("[MatchForever] telegram-web-app.js didn't load"); go(); };
+        document.head.appendChild(script);
+      }
+
+      whenTelegramReady(function () {
+        createUnityInstance(canvas, {
+          arguments: [],
+          dataUrl: "Build/c522b2163b345574ba40f2cf445f05c9.data.unityweb",
+          frameworkUrl: "Build/d1897bfb0223d39f49cd4e45c99e5a48.framework.js.unityweb",
+          codeUrl: "Build/e4a00c1214f0f80394f214c75efccfda.wasm.unityweb",
+          streamingAssetsUrl: "StreamingAssets",
+          companyName: "Rigoraft",
+          productName: "Swap Duel",
+          productVersion: "0.2.0",
+        }, (progress) => {
+          // the download ends at 0.9; the rest is the start-up, which only jumps to 1 at the end
+          document.querySelector("#loading-fill").style.width = Math.round(100 * Math.min(1, progress / 0.9)) + "%";
+        }).then((unityInstance) => {
+          resizeCanvas();
+          var loading = document.querySelector("#loading");
+          loading.style.opacity = 0;
+          setTimeout(function () { loading.remove(); }, 300);
+        }).catch((message) => {
+          alert(message);
+        });
+      });
+    </script>
+  </body>
+</html>

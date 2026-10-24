@@ -1,0 +1,45 @@
+{
+    "profile":  "pages",
+    "version":  "0.2.0",
+    "commit":  "831993ae49ca2493a559ead0cdd244a8d1766326",
+    "dirty":  false,
+    "built":  "2026-10-24T21:32:26Z",
+    "files":  [
+                  "Build/9dd57041f2f34df55cb6ba761d3fb14c.loader.js",
+                  "Build/c522b2163b345574ba40f2cf445f05c9.data.unityweb",
+                  "Build/d1897bfb0223d39f49cd4e45c99e5a48.framework.js.unityweb",
+                  "Build/e4a00c1214f0f80394f214c75efccfda.wasm.unityweb"
+              ],
+    "kept":  [
+                 {
+                     "commit":  "a17c329ae439ac921af930c19f32ac34135f9ef2",
+                     "replaced":  1792877638,
+                     "files":  [
+                                   "Build/0ad8ce595115439e15461c3d45437730.loader.js",
+                                   "Build/1b9c8ecf271945d6bd975c72c199368d.framework.js.unityweb",
+                                   "Build/232a478cde1c41ce62695784d9a636d0.wasm.unityweb",
+                                   "Build/e275cd4418bce60d39e9c04a0b277024.data.unityweb"
+                               ]
+                 },
+                 {
+                     "commit":  "e3ba59c137472da4560e3a6a572be3b49d7ec707",
+                     "replaced":  1792872820,
+                     "files":  [
+                                   "Build/32d41f29ce9c6fc631d0a934c0dd7188.wasm.unityweb",
+                                   "Build/673b6b8b5d8328e4d7894dcebde2c7c9.framework.js.unityweb",
+                                   "Build/d6fa56252e8c923fcc3b1350d116848e.loader.js",
+                                   "Build/f3f11999f9a3ee6cb873462e6508ba5e.data.unityweb"
+                               ]
+                 },
+                 {
+                     "commit":  "7499dd85c5623f75414965254e9aa97e7a99e244",
+                     "replaced":  1792860043,
+                     "files":  [
+                                   "Build/66888b17b98f946cdcc26fd212a4c420.framework.js.unityweb",
+                                   "Build/8da53248d472bec697c3e76a45fbfd81.data.unityweb",
+                                   "Build/b2ab2598dbc573a6077d34051b7edd88.loader.js",
+                                   "Build/ca977a5b337187b215d64a1566db1291.wasm.unityweb"
+                               ]
+                 }
+             ]
+}
