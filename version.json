@@ -1,0 +1,25 @@
+{
+    "profile":  "pages",
+    "version":  "0.2.0",
+    "commit":  "cc8050dc7bef61e2043796161a9c573741331a69",
+    "dirty":  false,
+    "built":  "2026-10-30T16:15:59Z",
+    "files":  [
+                  "Build/356c99a0cd4e4b169af58dcce7309d3f.data.unityweb",
+                  "Build/d6c72e53a9019ab3a8decc4c6fe03e0f.loader.js",
+                  "Build/ee73a3c7a94e3f44bc4311e7f6fd75e7.framework.js.unityweb",
+                  "Build/fce1fa91816acdd1e28b0b48739c349a.wasm.unityweb"
+              ],
+    "kept":  [
+                 {
+                     "commit":  "a80efdfba284b4fb10062a876711e12e6b40bcd9",
+                     "replaced":  1793376963,
+                     "files":  [
+                                   "Build/17091ac66d83b1ff1ea2a7b91609a565.wasm.unityweb",
+                                   "Build/4a4bcbffd11d56eb5a4712def19ac531.framework.js.unityweb",
+                                   "Build/57fb6961169fa985bb642a0b4bab41a0.loader.js",
+                                   "Build/c57e3594e3acc32f6be98b126887edd5.data.unityweb"
+                               ]
+                 }
+             ]
+}
