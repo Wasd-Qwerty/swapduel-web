@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Swap Duel Privacy Policy: website and Telegram</title>
+<!-- One page, two languages: #en / #ru in the URL pick one; otherwise the browser's first language (ru or be:
+     Russian). Without JavaScript both show, English first. -->
+<style>
+  :root { --bg: #f6f7fb; --card: #ffffff; --text: #1d2233; --muted: #5d6478; --accent: #2a55dc; --line: #e3e6ef; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #12141c; --card: #1a1d28; --text: #e8eaf2; --muted: #a0a6b8; --accent: #8aa6ff; --line: #2b2f3d; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.6 -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 32px 16px 64px; }
+  article { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 24px 22px; }
+  article + article { margin-top: 24px; }
+  article { scroll-margin-top: 70px; } /* a #en / #ru jump keeps the language links in view */
+  h1 { font-size: 26px; line-height: 1.25; margin: 0 0 6px; }
+  h2 { font-size: 18px; margin: 28px 0 8px; }
+  p, ul { margin: 0 0 12px; }
+  ul { padding-left: 22px; }
+  li { margin: 4px 0; }
+  .meta { color: var(--muted); font-size: 14px; margin-bottom: 20px; }
+  a { color: var(--accent); overflow-wrap: anywhere; }
+  nav { text-align: right; font-size: 14px; margin-bottom: 12px; color: var(--muted); }
+  html[data-lang="en"] article[lang="ru"], html[data-lang="ru"] article[lang="en"] { display: none; }
+  html[data-lang="en"] nav a[href="#en"], html[data-lang="ru"] nav a[href="#ru"] {
+    color: var(--text); font-weight: 600; text-decoration: none; }
+</style>
+<script>
+  (function () {
+    var root = document.documentElement;
+    function pick() {
+      var hash = location.hash.slice(1);
+      if (hash === "en" || hash === "ru") return hash;
+      var first = (navigator.languages && navigator.languages[0]) || navigator.language || "";
+      var base = first.toLowerCase().split("-")[0];
+      return base === "ru" || base === "be" ? "ru" : "en";
+    }
+    function apply() {
+      var lang = pick();
+      root.lang = lang;
+      root.setAttribute("data-lang", lang);
+      document.title = lang === "ru" ? "Swap Duel — политика конфиденциальности: сайт и Telegram"
+                                     : "Swap Duel Privacy Policy: website and Telegram";
+    }
+    apply();
+    window.addEventListener("hashchange", function () { apply(); window.scrollTo(0, 0); });
+  })();
+</script>
+</head>
+<body>
+<main>
+<nav><a href="#en" hreflang="en" lang="en">English</a> · <a href="#ru" hreflang="ru" lang="ru">Русский</a></nav>
+
+<article lang="en" id="en">
+<h1>Swap Duel Privacy Policy: website and Telegram</h1>
+<p class="meta">Effective October 26, 2026 · Developer: Rigoraft · Contact:
+<a id="contact-en" href="mailto:support@rigoraft.com">support@rigoraft.com</a></p>
+
+<p>This policy covers Swap Duel played in a web browser at
+<a href="https://wasd-qwerty.github.io/swapduel-web/">wasd-qwerty.github.io/swapduel-web</a> and as a Telegram Mini
+App (<a href="https://t.me/SwapDuelBot">@SwapDuelBot</a>). The Android app has a privacy policy of its own.</p>
+
+<p><strong>In short.</strong> Swap Duel doesn’t need an account and never asks for your email or phone number. Inside
+Telegram, the game calls you by your Telegram name and shows your Telegram photo, to you and to the player you duel
+online; in the game you can choose another name or hide the photo. Gameplay statistics are collected only if you allow them, and they
+aren’t linked to your name. The game shows no ads, has no in-app purchases, and sets no cookies. Online duels connect
+through Unity; duels with the bot and the tutorial work offline.</p>
+
+<h2>Who we are</h2>
+<p>Swap Duel is developed by Rigoraft. The person responsible for your data (the data controller) is
+<span id="owner-en">Artem Bobylev</span>, <span id="owner-country-en">Kazakhstan</span>. Write to
+<a href="mailto:support@rigoraft.com">support@rigoraft.com</a> about anything in this policy.</p>
+
+<h2>Inside Telegram</h2>
+<p>When you open the game in Telegram, the game reads from the launch data Telegram gives it: your first and last
+name, your username, your language, and a link to your profile photo (if your Telegram privacy settings allow it),
+along with the link you opened the game by. The game doesn’t get your phone number and doesn’t use your Telegram
+user ID, which the launch data also holds.</p>
+<ul>
+  <li><strong>Your name.</strong> The game calls you by your Telegram first and last name (only the characters the
+    game can draw, up to 16 of them) unless you choose a name in the game. Your username is shown only to you. Your
+    language picks the game’s language the first time you play.</li>
+  <li><strong>What your opponent sees.</strong> In an online duel, with a friend or with a random player in a quick
+    match, your opponent sees your name and your Telegram photo: the game sends them the link to the photo, and their
+    game loads the picture. You can hide your photo with the “Telegram photo” switch in the name window (Settings →
+    “Nickname”, or “Change” on the duel-by-code screen): then the game neither loads it nor sends it to anyone, and shows
+    your initial instead.</li>
+  <li><strong>How photos load.</strong> Photos come through our photo proxy, a small service that Cloudflare, Inc. runs
+    for us. It receives only the photo’s link (and, as any web server does, your IP address and browser details),
+    fetches the picture from Telegram, and passes it on. It stores nothing; Cloudflare and your browser keep the
+    picture in their cache for up to an hour. If your photo is hidden, the game shows your initial instead.</li>
+  <li><strong>Telegram’s cloud.</strong> The game keeps a copy of your settings, name, progress, your answer about
+    statistics, the install ID (once you allow statistics), and the Unity sign-in in Telegram’s cloud storage for
+    this Mini App, so they follow you to another device; the record of recent duels stays only in your browser.
+    Each save replaces the previous copy. We don’t receive this copy; Telegram stores it.</li>
+  <li><strong>Telegram itself.</strong> Inside Telegram, the page loads Telegram’s script from telegram.org, and
+    Telegram handles your data under the <a href="https://telegram.org/privacy">Telegram Privacy Policy</a>.</li>
+</ul>
+
+<h2>Gameplay statistics (only with your consent)</h2>
+<p>The first time you open the game, it asks whether we may collect gameplay statistics (inside Telegram, your
+answer follows you to your other devices). Until you answer, nothing is sent. If you allow them, what you did since
+opening the game (for example, opening an invitation) is sent too; if you choose “Don’t allow”, that is discarded
+and nothing is ever sent. You can change your answer at any time in Settings → “Gameplay stats”
+(“<span lang="ru">Статистика игры</span>” if the game is in Russian).</p>
+<p>If you allow statistics, the game sends us:</p>
+<ul>
+  <li><strong>A random install ID.</strong> It’s created when you allow statistics and isn’t linked to your
+    name or your Telegram account. Inside Telegram it travels with the game’s copy in Telegram’s cloud, so it’s the
+    same on your devices. The statistics library also adds a random session ID (a new one after 30 minutes without
+    playing).</li>
+  <li><strong>Gameplay events:</strong> opening the game (and how long it was in the background); the start and end
+    of a duel (mode, bot level, your role and connection type, result, how it ended, length, number of moves and
+    bonuses); rematches; opening or joining a room and connection errors in those duels; quick matches (whether an
+    opponent was found, and how long you waited); sending an invitation (and how), opening an
+    invitation and playing it, and the rewards for invited friends; tutorial steps, and whether and how quickly you
+    finished or skipped the tutorial; and changing the language. For each install ID we also keep the game version,
+    build type and link tag (see below) of the launch when statistics were first sent.</li>
+  <li><strong>Which link opened the game.</strong> A link in one of our posts carries a short tag we chose for that
+    post or chat (for example “reddit”); the statistics record that tag, or “invite” for a friend’s invitation and
+    “direct” when there was no link. The tag is ours and says nothing about you.</li>
+  <li><strong>Who invited you.</strong> When a player whose statistics are on invites you to a duel, their game
+    puts their install ID in the duel’s room (older links carried it in the link itself). If you come to the duel by
+    their link, your statistics record it, so we can count invitations.</li>
+  <li><strong>Technical data:</strong> game version and build, whether the game runs in Telegram or a browser, the
+    operating system and its version, device type and model as your browser reports them, and screen size.</li>
+  <li><strong>Approximate location:</strong> your country, region, and city (with the approximate coordinates and time
+    zone of that area), worked out from your IP address when an event arrives. The IP address itself isn’t stored.</li>
+</ul>
+<p>Statistics never include your name, your Telegram name or username, your photo, or room codes.</p>
+<p><strong>Why.</strong> To understand how people play Swap Duel, what to improve, and whether invitations and quick
+matches work. The statistics aren’t used for advertising, aren’t sold, and aren’t shared with advertisers. We don’t
+make decisions about you by automated means and don’t profile you for advertising.</p>
+<p><strong>Where and how long.</strong> PostHog (PostHog Inc., USA) processes the statistics on our behalf. They’re
+stored on servers in the European Union (Frankfurt); PostHog and its subprocessors may also process them in the United
+States and elsewhere, under the EU–US Data Privacy Framework and the Standard Contractual Clauses in PostHog’s data
+processing agreement. The data is sent over a secure connection. Events are kept for up to 12 months; the record of an
+install ID (its first version and build type, the install ID of the player who invited it, and its last
+approximate location) is deleted after 12 months without new events.</p>
+
+<h2>Your name in the game</h2>
+<p>You can choose a name (2–16 characters: letters, digits, spaces, and the marks _ - . '), but you don’t have to. It’s stored in your
+browser (and, inside Telegram, in Telegram’s cloud copy). In an online duel your name and your avatar are sent to your
+opponent. Without a chosen name you’re shown by your Telegram name inside Telegram, and as “Player” on the website.
+Your name isn’t part of the statistics.</p>
+
+<h2>Online duels</h2>
+<p>Duels with a friend (by a room code or an invitation link) and quick matches with a random player connect through
+Unity Gaming Services, run by Unity Technologies:</p>
+<ul>
+  <li><strong>Unity Authentication</strong> signs the game in without registration and creates a random player ID,
+    kept in your browser (and in Telegram’s cloud copy) and on Unity’s servers until it’s deleted (see “Deleting your data”).</li>
+  <li><strong>Unity Lobby</strong> keeps the room while players gather. A room you open for a friend also holds
+    your install ID if your statistics are on; only a player who joins the room sees it. For a quick match, the game looks for an open
+    quick-match room or opens one; until a second player joins, other players looking for a match can see the room
+    with its random IDs and the version of the game’s rules it plays by, but not your name or photo. If no one comes in 15 seconds, the game offers a duel with the bot,
+    labelled “Bot”.</li>
+  <li><strong>Unity Relay</strong> passes the moves, your name and avatar, your Telegram photo link (unless you hid it), and short
+    connection checks between the two games. Relay sees both players’ IP addresses and keeps the IP address and player
+    ID for 30 days. The game picks the nearest Relay region from your browser’s time zone.</li>
+</ul>
+<p>An invitation link holds the room code, which anyone who gets the link can see. If Unity Lobby can’t be reached
+and the game shares a direct connection code instead, the link also holds your install ID when your statistics are
+on. The game removes these from the address bar once it has read them. When a friend comes to a duel by your
+invitation, their game tells yours so (a single yes or no) to give you both a reward; the counting happens on your
+devices. If your opponent plays in Telegram, your game loads their photo through our photo proxy (see “Inside
+Telegram”), which then receives your IP address and browser details. During an online duel the game also checks
+its own connection by asking the website for a small file.</p>
+<p>Duels with the bot and the tutorial run entirely in your browser.</p>
+
+<h2>Our processors</h2>
+<p>These companies process data on our behalf, as our processors, under their data processing agreements:</p>
+<ul>
+  <li>Unity Technologies: the online duel services (Authentication, Lobby, Relay), under the
+    <a href="https://unity.com/legal/unity-data-processing-addendum-dpa">Unity data processing addendum</a>. More:
+    <a href="https://unity.com/legal/game-player-and-app-user-privacy-policy">Unity’s privacy policy for game players
+    and app users</a>;</li>
+  <li>PostHog: the statistics, if you allow them;</li>
+  <li>Cloudflare: the photo proxy.</li>
+</ul>
+<p>They may process data outside the European Union, under the Standard Contractual Clauses (and, for US companies,
+the EU–US Data Privacy Framework where they take part in it). The website itself is hosted on GitHub Pages: as any web
+server does, GitHub receives your IP address and browser details when the page loads and handles them under the
+<a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub Privacy
+Statement</a>.</p>
+
+<h2>What stays in your browser</h2>
+<p>Your settings, name, win count and score against the bot, tutorial progress, invitation rewards, your answer about
+statistics, the install ID (once you allow statistics), and the Unity sign-in are stored in your browser’s storage
+for this site, and so is a technical record of up to 20 recent duels (moves, bonuses, and results, without names)
+kept for checking results later. Once you allow statistics, the statistics library also keeps its own random IDs and
+the events not yet sent there. Once you play online, Unity’s services keep their own random installation ID there
+too. Inside Telegram, Telegram’s script keeps the launch data it gave the page in the tab’s session storage until
+the tab closes. Your browser also keeps the game’s files so the game loads faster next time. The game sets no
+cookies.</p>
+
+<h2>What’s optional</h2>
+<p>Statistics and a chosen name are optional: the game works the same without them. To keep your Telegram photo out
+of the game, turn off the “Telegram photo” switch in the name window, or hide the photo in Telegram’s privacy
+settings. The Unity connection is needed only for online duels; the rest of
+the game works without it.</p>
+
+<h2>Letters to us</h2>
+<p>If you write to <a href="mailto:support@rigoraft.com">support@rigoraft.com</a>, we use your email address and what
+you write only to answer you, and delete the correspondence within 12 months after it ends. Letters pass through our
+email provider.</p>
+
+<h2>Legal basis</h2>
+<p>For players in the European Union, the United Kingdom, and other places with similar laws:</p>
+<ul>
+  <li>statistics, and keeping the install ID and the statistics library’s IDs in your browser for them: your consent (Article 6(1)(a) GDPR, and the
+    rules on storing information on your device). You can withdraw it at any time; that doesn’t affect statistics sent
+    before;</li>
+  <li>running the game and the duels you start: connecting through Unity (and keeping its sign-in and IDs in your
+    browser), sending your moves, name, and avatar to your
+    opponent, and keeping your settings and progress in your browser and in Telegram’s cloud: needed to provide the
+    game you asked for (Article 6(1)(b) GDPR);</li>
+  <li>using your Telegram name and photo and showing them to your opponent: our legitimate interest in letting players
+    see who they play with (Article 6(1)(f) GDPR);</li>
+  <li>letters to us: our legitimate interest in answering you (Article 6(1)(f) GDPR).</li>
+</ul>
+
+<h2>Withdrawing consent and objecting</h2>
+<p><strong>You can withdraw your consent to statistics at any time: turn statistics off in Settings, and the game stops
+sending them; statistics that haven’t been sent yet are deleted.</strong> The install ID and the statistics
+library’s IDs stay in your browser (and the install ID in Telegram’s cloud copy), unused, until you clear them (see
+“Deleting your data”). To stop your Telegram name from being shown,
+choose another name in the game; to stop your photo from being shown, turn off the “Telegram photo” switch. To object to other processing based on legitimate interest, write to
+<a href="mailto:support@rigoraft.com">support@rigoraft.com</a>.</p>
+
+<h2>Your rights</h2>
+<p>You can ask us for access to your data, to correct or delete it, to restrict its processing, and for a copy of it,
+and you can complain to the data protection authority in your country. Write to
+<a href="mailto:support@rigoraft.com">support@rigoraft.com</a>. Requests about the data our processors handle for us
+come to us as well. The statistics and Unity’s data are tied only to random IDs that we can’t link to your name or
+email, so we may not be able to find your records; we’ll do what we can with the details you give us.</p>
+<p>We don’t sell your personal information and don’t share it for targeted advertising.</p>
+
+<h2>Deleting your data</h2>
+<p><strong>In the game: Settings → “Delete my data”.</strong> It deletes your Unity player ID from Unity’s servers,
+turns statistics off, and erases everything the game stored in this browser. Inside Telegram it also replaces the
+game’s copy in Telegram’s cloud (see “Inside Telegram”) with an empty one, so the game starts over on your other
+devices too the next time you open it there. Then the game starts over as on its first launch, with every setting at
+its default: your Telegram name and photo show again until you change them. If you have played
+online, it needs an internet connection; if a step fails, the game says so and keeps the rest, so you can try again.
+Statistics already sent stay in PostHog under the install ID, which the game no longer keeps (on your other devices,
+from the next time you open it there), and are deleted automatically as described above.</p>
+<p>Statistics and Relay data are deleted automatically as described above. Write to us if you want your data deleted
+sooner or can’t use the button. Clearing this site’s data in your browser also removes everything the game stored
+there, but not the copy in Telegram’s cloud or the Unity player ID on Unity’s servers.</p>
+
+<h2>Children</h2>
+<p>The game isn’t directed at children under 13, and we don’t knowingly collect their data. If we learn that we have
+data of a child under 13, we’ll delete it. In quick matches players meet people they don’t know and see their names
+and Telegram photos.</p>
+
+<h2>Changes and questions</h2>
+<p>If this policy changes, we’ll update this page and the date at the top before the change reaches the game. Send
+questions about your data to <a id="contact-en-2" href="mailto:support@rigoraft.com">support@rigoraft.com</a>.</p>
+</article>
+
+<article lang="ru" id="ru">
+<h1>Политика конфиденциальности Swap Duel: сайт и Telegram</h1>
+<p class="meta">Действует с 26 октября 2026 года · Разработчик: Rigoraft · Связь:
+<a id="contact-ru" href="mailto:support@rigoraft.com">support@rigoraft.com</a></p>
+
+<p>Эта политика — про Swap Duel в браузере по адресу
+<a href="https://wasd-qwerty.github.io/swapduel-web/">wasd-qwerty.github.io/swapduel-web</a> и в Telegram как Mini App
+(<a href="https://t.me/SwapDuelBot">@SwapDuelBot</a>). У приложения для Android — своя политика.</p>
+
+<p><strong>Коротко.</strong> Swap Duel не требует регистрации и не спрашивает почту или телефон. В Telegram игра
+называет вас именем из Telegram и показывает ваше фото из Telegram — вам и сопернику в онлайн-дуэли; в игре можно
+выбрать другое имя или скрыть фото. Статистика игры собирается, только если вы разрешите, и не связана с вашим именем. В игре нет
+рекламы, покупок и файлов cookie. Онлайн-дуэли идут через Unity; бои с ботом и обучение работают без интернета.</p>
+
+<h2>Кто мы</h2>
+<p>Swap Duel разрабатывает Rigoraft. За ваши данные отвечает (контролёр данных) <span id="owner-ru">Artem Bobylev</span>,
+<span id="owner-country-ru">Казахстан</span>. По любым вопросам об этой политике пишите на
+<a href="mailto:support@rigoraft.com">support@rigoraft.com</a>.</p>
+
+<h2>В Telegram</h2>
+<p>Когда вы открываете игру в Telegram, игра берёт из данных запуска, которые передаёт Telegram, ваши имя и фамилию,
+имя пользователя (username), язык и ссылку на фото профиля (если это позволяют ваши настройки приватности в
+Telegram), а также ссылку, по которой вы открыли игру. Номер телефона игра не получает, а ваш идентификатор
+пользователя Telegram, который тоже есть в этих данных, не использует.</p>
+<ul>
+  <li><strong>Ваше имя.</strong> Игра называет вас именем и фамилией из Telegram (только знаки, которые игра умеет
+    рисовать, не больше 16), если вы не выбрали имя в игре. Username видите только вы. По языку Telegram игра выбирает
+    свой язык при первом запуске.</li>
+  <li><strong>Что видит соперник.</strong> В онлайн-дуэли — с другом или со случайным игроком в быстром матче —
+    соперник видит ваше имя и фото из Telegram: игра отправляет ему ссылку на фото, и его игра загружает картинку. Фото можно скрыть переключателем
+    «Фото из Telegram» в окне имени («Настройки» → «Никнейм» или «Изменить» на экране дуэли по коду): тогда игра его не
+    загружает и никому не отправляет, а вместо него показывает первую букву имени.</li>
+  <li><strong>Как загружаются фото.</strong> Фото идут через наш посредник — небольшой сервис, который для нас
+    запускает Cloudflare, Inc. Он получает только ссылку на фото (и, как любой веб-сервер, ваш IP-адрес и данные
+    браузера), берёт картинку у Telegram и передаёт её игре. Он ничего не хранит; Cloudflare и ваш браузер держат
+    картинку в кеше до часа. Если фото скрыто, игра показывает первую букву имени.</li>
+  <li><strong>Облако Telegram.</strong> Копию настроек, имени, прогресса, ответа про статистику, идентификатора
+    установки (когда вы разрешили статистику) и входа в Unity игра держит в облачном хранилище Telegram для этого
+    Mini App, чтобы всё это переходило с вами на другое устройство; запись о последних дуэлях остаётся только в
+    браузере. Каждое сохранение заменяет прежнюю копию. Нам эта копия не приходит — её хранит Telegram.</li>
+  <li><strong>Сам Telegram.</strong> В Telegram страница загружает скрипт Telegram с telegram.org, и Telegram
+    обрабатывает ваши данные по своей <a href="https://telegram.org/privacy">политике конфиденциальности</a>.</li>
+</ul>
+
+<h2>Статистика игры (только с вашего согласия)</h2>
+<p>При первом запуске игра спрашивает, можно ли собирать статистику игры (в Telegram ваш ответ переходит с вами на
+другие устройства). Пока вы не ответили, ничего не отправляется. Если разрешить, отправится и то, что вы сделали с
+момента запуска (например, открыли приглашение); если выбрать «Не разрешать», это удалится и не отправится ничего
+и потом. Ответ можно поменять в любой момент: Настройки → «Статистика игры» («<span lang="en">Gameplay stats</span>»,
+если игра на английском).</p>
+<p>Если вы разрешили статистику, игра отправляет нам:</p>
+<ul>
+  <li><strong>Случайный идентификатор установки.</strong> Создаётся, когда вы разрешаете статистику, и не связан с вашим именем
+    или аккаунтом Telegram. В Telegram он переходит вместе с копией игры в облаке Telegram, поэтому одинаков на ваших
+    устройствах. Библиотека статистики добавляет ещё случайный идентификатор сеанса (новый после 30 минут без
+    игры).</li>
+  <li><strong>События в игре:</strong> запуск игры (и сколько она пробыла в фоне); начало и конец дуэли (режим,
+    уровень бота, ваша роль и тип соединения, результат, чем закончилась, длительность, число ходов и бонусов);
+    реванши; создание комнаты или вход в неё и ошибки подключения в таких дуэлях; быстрый матч (нашёлся ли соперник и
+    сколько вы ждали); отправка приглашения (и каким способом), открытие приглашения и игра по нему,
+    награды за приглашённых друзей; шаги обучения, а также прошли вы его до конца или пропустили и за сколько
+    времени; смена языка. Для каждого идентификатора установки мы храним ещё версию и тип сборки игры и метку ссылки
+    (см. ниже) того запуска, когда статистика отправилась впервые.</li>
+  <li><strong>По какой ссылке открыта игра.</strong> В ссылке из нашего поста есть короткая метка, которую мы задали
+    для этого поста или чата (например, «reddit»); статистика записывает эту метку, а для приглашения друга —
+    «invite», без ссылки — «direct». Метку задаём мы, о вас она ничего не говорит.</li>
+  <li><strong>Кто вас пригласил.</strong> Когда вас зовёт в дуэль игрок, у которого включена статистика, его игра
+    кладёт его идентификатор установки в комнату дуэли (в старых ссылках он был в самой ссылке). Если вы пришли в
+    дуэль по его ссылке, ваша статистика это отмечает — так мы считаем приглашения.</li>
+  <li><strong>Технические данные:</strong> версия и сборка игры, где она запущена (Telegram или браузер),
+    операционная система и её версия, тип и модель устройства, как их сообщает браузер, размер экрана.</li>
+  <li><strong>Примерное местоположение:</strong> страна, регион и город (с примерными координатами и часовым поясом
+    этого места) определяются по IP-адресу в момент получения события. Сам IP-адрес не сохраняется.</li>
+</ul>
+<p>В статистику никогда не попадают ваше имя, имя или username в Telegram, фото и коды комнат.</p>
+<p><strong>Зачем.</strong> Чтобы понять, как играют в Swap Duel, что улучшить и работают ли приглашения и быстрый
+матч. Статистика не используется для рекламы, не продаётся и не передаётся рекламодателям. Мы не принимаем решений о
+вас автоматически и не составляем ваш профиль для рекламы.</p>
+<p><strong>Где и сколько хранится.</strong> Статистику по нашему поручению обрабатывает PostHog (PostHog Inc., США).
+Она хранится на серверах в Евросоюзе (Франкфурт); PostHog и его подрядчики могут обрабатывать её также в США и других
+странах — на основании рамочного соглашения ЕС и США о защите данных (EU–US Data Privacy Framework) и стандартных
+договорных условий (Standard Contractual Clauses) из соглашения PostHog об обработке данных. Данные передаются по
+защищённому соединению. События хранятся до 12 месяцев; запись об идентификаторе установки (его первая версия и
+тип сборки, идентификатор пригласившего игрока и последнее примерное местоположение) удаляется через 12 месяцев без новых событий.</p>
+
+<h2>Ваше имя в игре</h2>
+<p>Можно выбрать имя (2–16 знаков: буквы, цифры, пробелы и знаки _ - . '), но это не обязательно. Оно хранится в браузере (и в
+Telegram — в копии в облаке Telegram). В онлайн-дуэли ваше имя и аватар отправляются сопернику. Если имя не выбрано,
+в Telegram вас видно под именем из Telegram, а на сайте — как «Игрок». В статистику имя не попадает.</p>
+
+<h2>Онлайн-дуэли</h2>
+<p>Дуэли с другом (по коду комнаты или ссылке-приглашению) и быстрые матчи со случайным игроком идут через Unity
+Gaming Services — сервисы Unity Technologies:</p>
+<ul>
+  <li><strong>Unity Authentication</strong> входит в игру без регистрации и создаёт случайный идентификатор игрока,
+    который хранится в браузере (и в копии в облаке Telegram) и на серверах Unity, пока его не удалят (см. «Удаление данных»).</li>
+  <li><strong>Unity Lobby</strong> держит комнату, пока собираются игроки. В комнате, которую вы открыли для
+    друга, есть и ваш идентификатор установки, если у вас включена статистика; его видит только вошедший игрок. Для
+    быстрого матча игра ищет открытую
+    комнату быстрого матча или открывает свою; пока не вошёл второй игрок, другие ищущие соперника могут видеть
+    комнату со случайными идентификаторами и версией правил игры, но не ваше имя или фото. Если за 15 секунд никто не пришёл, игра предлагает бой с ботом — он
+    подписан «Бот».</li>
+  <li><strong>Unity Relay</strong> передаёт между двумя играми ходы, ваши имя и аватар, ссылку на фото из Telegram (если вы его не скрыли) и
+    короткие проверки связи. Relay видит IP-адреса обоих игроков и хранит IP-адрес и идентификатор игрока 30 дней.
+    Ближайший регион Relay игра выбирает по часовому поясу браузера.</li>
+</ul>
+<p>Ссылка-приглашение содержит код комнаты — его видит любой, у кого есть ссылка. Если Unity Lobby недоступен и
+игра делится кодом прямого соединения, в ссылке есть и ваш идентификатор установки, когда у вас включена статистика.
+Прочитав их, игра убирает их из адресной строки. Когда друг приходит в дуэль по вашему
+приглашению, его игра сообщает об этом вашей (одно «да» или «нет»), чтобы наградить вас обоих; подсчёт идёт на ваших
+устройствах. Если соперник играет в Telegram, ваша игра загружает его фото через наш посредник (см. «В Telegram»),
+и посредник получает ваш IP-адрес и данные браузера. Во время онлайн-дуэли игра ещё проверяет своё соединение,
+запрашивая с сайта небольшой файл.</p>
+<p>Бои с ботом и обучение целиком идут в браузере.</p>
+
+<h2>Наши обработчики</h2>
+<p>Эти компании обрабатывают данные по нашему поручению, как наши обработчики, по своим соглашениям об обработке
+данных:</p>
+<ul>
+  <li>Unity Technologies — сервисы онлайн-дуэлей (Authentication, Lobby, Relay), по
+    <a href="https://unity.com/legal/unity-data-processing-addendum-dpa">соглашению Unity об обработке данных</a>.
+    Подробнее: <a href="https://unity.com/legal/game-player-and-app-user-privacy-policy">политика конфиденциальности
+    Unity для игроков и пользователей приложений</a>;</li>
+  <li>PostHog — статистика, если вы её разрешили;</li>
+  <li>Cloudflare — посредник для фото.</li>
+</ul>
+<p>Они могут обрабатывать данные за пределами Евросоюза на основании стандартных договорных условий (а американские
+компании — и рамочного соглашения ЕС и США, если в нём участвуют). Сам сайт размещён на GitHub Pages: как любой
+веб-сервер, GitHub получает ваш IP-адрес и данные браузера при загрузке страницы и обращается с ними по своему
+<a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">заявлению о
+конфиденциальности</a>.</p>
+
+<h2>Что остаётся в браузере</h2>
+<p>Настройки, имя, счёт побед и счёт против бота, прогресс обучения, награды за приглашения, ваш ответ про
+статистику, идентификатор установки (когда вы разрешили статистику) и вход в Unity хранятся в хранилище браузера
+для этого сайта; там же — техническая запись о последних дуэлях, не больше 20 (ходы, бонусы и итоги, без имён), —
+для будущей проверки результатов. Когда вы разрешили статистику, там же хранит свои случайные идентификаторы и ещё
+не отправленные события библиотека статистики. Когда вы сыграли онлайн, там же хранят свой случайный идентификатор
+установки сервисы Unity. В Telegram скрипт Telegram держит переданные странице данные запуска в хранилище сеанса
+вкладки, пока она не закрыта. Ещё браузер хранит файлы игры, чтобы в следующий раз она загрузилась быстрее. Файлов
+cookie игра не ставит.</p>
+
+<h2>Что не обязательно</h2>
+<p>Статистика и выбранное имя не обязательны: без них игра работает так же. Чтобы фото из Telegram не попадало в
+игру, выключите «Фото из Telegram» в окне имени или скройте фото в настройках приватности Telegram. Соединение с Unity нужно только для онлайн-дуэлей; остальная игра
+работает без него.</p>
+
+<h2>Письма нам</h2>
+<p>Если вы пишете на <a href="mailto:support@rigoraft.com">support@rigoraft.com</a>, мы используем ваш адрес и текст
+письма только чтобы ответить, и удаляем переписку в течение 12 месяцев после её окончания. Письма проходят через нашего
+почтового провайдера.</p>
+
+<h2>Правовое основание</h2>
+<p>Для игроков из Евросоюза, Великобритании и других мест с похожими законами:</p>
+<ul>
+  <li>статистика и хранение для неё в браузере идентификатора установки и идентификаторов библиотеки статистики — ваше согласие (статья 6(1)(a) GDPR и
+    правила о хранении информации на вашем устройстве). Его можно отозвать в любой момент; на статистику, отправленную
+    раньше, это не влияет;</li>
+  <li>работа игры и дуэлей, которые вы начинаете: соединение через Unity (и хранение в браузере его входа и
+    идентификаторов), отправка ходов, имени и аватара сопернику,
+    хранение настроек и прогресса в браузере и в облаке Telegram — нужны, чтобы предоставить игру, которую вы
+    запросили (статья 6(1)(b) GDPR);</li>
+  <li>использование имени и фото из Telegram и показ их сопернику — наш законный интерес в том, чтобы игроки видели,
+    с кем играют (статья 6(1)(f) GDPR);</li>
+  <li>письма нам — наш законный интерес вам ответить (статья 6(1)(f) GDPR).</li>
+</ul>
+
+<h2>Отзыв согласия и возражение</h2>
+<p><strong>Согласие на статистику можно отозвать в любой момент: выключите статистику в настройках, и игра перестанет
+её отправлять, а неотправленная удалится.</strong> Идентификатор установки и идентификаторы библиотеки
+статистики остаются в браузере (а идентификатор установки — и в копии в облаке Telegram) и не используются, пока вы
+их не сотрёте (см. «Удаление данных»). Чтобы имя из Telegram не показывалось, выберите в игре другое имя; чтобы не показывалось фото — выключите «Фото из Telegram».
+Чтобы возразить против другой обработки на основании законного интереса, напишите на
+<a href="mailto:support@rigoraft.com">support@rigoraft.com</a>.</p>
+
+<h2>Ваши права</h2>
+<p>Вы можете запросить доступ к своим данным, их исправление или удаление, ограничение обработки, получить копию
+данных, а также пожаловаться в орган по защите данных вашей страны. Пишите на
+<a href="mailto:support@rigoraft.com">support@rigoraft.com</a>. Запросы о данных, которые для нас обрабатывают наши
+обработчики, тоже присылайте нам. Статистика и данные Unity привязаны только к случайным идентификаторам, которые мы
+не можем связать с вашим именем или почтой, поэтому найти ваши записи может не получиться; мы сделаем всё, что можно,
+по тем данным, которые вы сообщите.</p>
+<p>Мы не продаём ваши персональные данные и не передаём их для таргетированной рекламы.</p>
+
+<h2>Удаление данных</h2>
+<p><strong>В игре: «Настройки» → «Удалить мои данные».</strong> Кнопка удаляет ваш идентификатор игрока Unity с
+серверов Unity, выключает статистику и стирает всё, что игра сохранила в этом браузере. В Telegram она ещё заменяет
+копию игры в облаке Telegram (см. «В Telegram») пустой — так игра начнётся заново и на других ваших устройствах, когда
+вы откроете её там. После этого игра начинается заново, как при первом запуске, и все настройки — как по умолчанию:
+имя и фото из Telegram снова видны, пока вы их не смените. Если вы играли онлайн, нужен интернет;
+если какой-то шаг не удался, игра скажет об этом и не тронет остальное — можно попробовать ещё раз. Уже отправленная
+статистика остаётся в PostHog под идентификатором установки, который игра больше не хранит (на других устройствах — с
+момента, когда вы откроете её там), и удаляется автоматически в сроки, указанные выше.</p>
+<p>Статистика и данные Relay удаляются автоматически в сроки, указанные выше. Напишите нам, если хотите удалить данные
+раньше или не можете воспользоваться кнопкой. Очистка данных этого сайта в браузере тоже стирает всё, что игра там
+сохранила, но не копию в облаке Telegram и не идентификатор игрока Unity на серверах Unity.</p>
+
+<h2>Дети</h2>
+<p>Игра не предназначена специально для детей младше 13 лет, и мы сознательно не собираем их данные. Если узнаем, что у
+нас есть данные ребёнка младше 13 лет, мы их удалим. В быстром матче игроки встречают незнакомых людей и видят их
+имена и фото из Telegram.</p>
+
+<h2>Изменения и вопросы</h2>
+<p>Если политика изменится, мы обновим эту страницу и дату вверху до того, как изменение придёт в игру. Вопросы о
+данных присылайте на <a id="contact-ru-2" href="mailto:support@rigoraft.com">support@rigoraft.com</a>.</p>
+</article>
+</main>
+</body>
+</html>

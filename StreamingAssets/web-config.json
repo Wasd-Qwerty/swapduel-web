@@ -1,0 +1,14 @@
+{
+    "platform": "web",
+    "baseUrl": "https://wasd-qwerty.github.io/swapduel-web/",
+    "tgBot": "SwapDuelBot",
+    "tgApp": "",
+    "avatarProxy": "https://swapduel-avatar.rigoraft.workers.dev/",
+    "privacyUrl": "",
+    "ads": {
+        "network": ""
+    },
+    "analytics": {
+        "posthogKey": "phc_CgZMbEN35WptTvpx9oeHe5bGYCvpGKHnqXSAnCi6URME"
+    }
+}
